@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - The Game Master</title>
+    <link rel="icon" href="assets/images/Game Masters Logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=15">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1846703614434217"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="assets/images/Game Masters Logo.png" alt="The Game Master Logo" class="logo-img">
+                The Game Master
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="games.html" class="active">Games</a>
+            <a href="forms.html">Forms</a>
+            <a href="cheats.html">Cheats</a>
+        </div>
+    </nav>
+
+    <main>
+        <h1>Games</h1>
+        <div id="category-filters"></div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search for a game...">
+        </div>
+        <div class="game-grid" id="game-grid">
+            <!-- Game cards will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>Last Updated: 6/20/2025</p>
+    </footer>
+
+    <button id="back-to-top-btn" title="Go to top">&uarr;</button>
+
+    <script src="games/games-data.js?v=2"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameGrid = document.getElementById('game-grid');
+            const searchInput = document.getElementById('search-input');
+            const categoryFilters = document.getElementById('category-filters');
+
+            // --- Create Category Filters ---
+            const categories = ['All', ...new Set(games.map(game => game.category))];
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.textContent = category;
+                button.classList.add('filter-btn');
+                if (category === 'All') {
+                    button.classList.add('active');
+                }
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    filterGames();
+                });
+                categoryFilters.appendChild(button);
+            });
+
+            // --- Display Games ---
+            const displayGames = (filteredGames) => {
+                gameGrid.innerHTML = '';
+                const gamesToDisplay = filteredGames || games;
+
+                if (gamesToDisplay.length === 0) {
+                    gameGrid.innerHTML = '<p class="no-results" style="color: #00ff00;">No games found...</p>';
+                    return;
+                }
+
+                gamesToDisplay.forEach(game => {
+                    const gameCard = document.createElement('a');
+                    gameCard.href = `games/${game.url}`;
+                    gameCard.className = 'game-card';
+                    gameCard.setAttribute('data-category', game.category);
+
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'game-image-container';
+
+                    const gameImage = document.createElement('img');
+                    gameImage.src = `assets/images/games/${game.image}`;
+                    gameImage.alt = game.title;
+                    gameImage.onerror = () => {
+                        gameImage.src = 'assets/images/placeholder.jpg';
+                    };
+
+                    const gameTitle = document.createElement('h2');
+                    gameTitle.className = 'game-title';
+                    gameTitle.textContent = game.title;
+
+                    imageContainer.appendChild(gameImage);
+                    gameCard.appendChild(imageContainer);
+                    gameCard.appendChild(gameTitle);
+                    gameGrid.appendChild(gameCard);
+                });
+            };
+
+            // --- Filter and Search ---
+            const filterGames = () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const activeCategory = document.querySelector('.filter-btn.active').textContent;
+
+                const filteredGames = games.filter(game => {
+                    const matchesCategory = activeCategory === 'All' || game.category === activeCategory;
+                    const matchesSearch = game.title.toLowerCase().includes(searchTerm);
+                    return matchesCategory && matchesSearch;
+                });
+
+                displayGames(filteredGames);
+            };
+
+            searchInput.addEventListener('input', filterGames);
+            displayGames();
+
+            // --- Back to Top Button ---
+            const backToTopBtn = document.getElementById('back-to-top-btn');
+
+            window.onscroll = () => {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            };
+
+            backToTopBtn.addEventListener('click', () => {
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            });
+        });
+    </script>
+    <script src="app.js?v=1"></script>
+</body>
+</html> 
