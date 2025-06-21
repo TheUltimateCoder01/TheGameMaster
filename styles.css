@@ -150,6 +150,11 @@ h1 {
     transform: translateY(-5px);
 }
 
+.game-card:hover .game-image-container {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+}
+
 .game-image-container {
     position: relative;
     width: 100%;
@@ -218,10 +223,11 @@ footer p {
 
 /* SEARCH BAR */
 .search-bar {
-    display: flex;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.search-bar input {
+#search-input {
     width: 100%;
     padding: 10px;
     background-color: #000000;
@@ -229,6 +235,7 @@ footer p {
     border-radius: 5px;
     color: #00ff00;
     font-size: 1rem;
+    font-family: 'Oswald', sans-serif;
 }
 
 #category-filters {
@@ -548,10 +555,9 @@ footer p {
     font-family: 'Courier New', Courier, monospace;
 }
 
+/* Back-to-Top Button */
 #back-to-top-btn {
-    display: flex;
-    opacity: 0;
-    visibility: hidden;
+    display: none;
     position: fixed;
     bottom: 20px;
     right: 30px;
@@ -581,4 +587,57 @@ footer p {
     background-color: #00ff00;
     color: #000;
     box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+}
+
+.recently-played-container {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #00ff00;
+}
+
+.recently-played-container h2 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #00ff00;
+}
+
+.game-grid-recent {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.game-grid-recent .game-card {
+    position: relative;
+}
+
+.remove-from-recent-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 24px;
+    height: 24px;
+    background-color: #ff0000;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 10;
+}
+
+.game-grid-recent .game-card:hover .remove-from-recent-btn {
+    opacity: 1;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 } 
