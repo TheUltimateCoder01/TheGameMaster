@@ -12,11 +12,11 @@ const games = [
     { title: "Elastic Man", url: "elastic-man.html", category: "Funny", image: "Elastic Man.png" },
     { title: "Epic Ninja", url: "epic-ninja.html", category: "Action", image: "Epic Ninja.png" },
     { title: "Fireboy and Watergirl Forest Temple", url: "fireboy-and-watergirl.html", category: "Puzzle", image: "Fireboy and Watergirl Forest Temple.png" },
-    { title: "Five Nights at Freddy's", url: "https://fnafgame.io/fnaf.embed?ez_iframe=1", category: "Horror", image: "Five Nights at Freddy's.png" },
-    { title: "Flappy Bird", url: "flappy-bird.html", category: "Skill", image: "Flappy Bird.png" },
+    { title: "Five Nights at Freddy's", url: "five-nights-at-freddys.html", category: "Horror", image: "Five Nights at Freddy's.png" },
+    { title: "Flappy Bird", url: "flappy-bird.html", category: "Arcade", image: "Flappy Bird.png" },
     { title: "G-Switch 3", url: "g-switch-3.html", category: "Skill", image: "G-Switch 3.png" },
-    { title: "Geometry Dash", url: "geometry-dash.html", category: "Skill", image: "Geometry Dash.png" },
-    { title: "Getting Over It", url: "getting-over-it.html", category: "Skill", image: "Getting Over it.png" },
+    { title: "Geometry Dash", url: "geometry-dash.html", category: "Arcade", image: "Geometry Dash.png" },
+    { title: "Getting Over it", url: "getting-over-it.html", category: "Skill", image: "Getting Over it.png" },
     { title: "Google Doodle Baseball", url: "google-doodle-baseball.html", category: "Sports", image: "Google Doodle Baseball.png" },
     { title: "Google Gravity", url: "google-gravity.html", category: "Funny", image: "Google Gravity.png" },
     { title: "Google Santa Tracker", url: "google-santa-tracker.html", category: "Holiday", image: "Google Santa Tracker.png" },
@@ -42,8 +42,8 @@ const games = [
     { title: "Snake.io", url: "snake-io.html", category: "Multiplayer", image: "Snake.io.png" },
     { title: "Slope", url: "slope.html", category: "Skill", image: "Slope.png" },
     { title: "Stickman Hook", url: "stickman-hook.html", category: "Skill", image: "Stickman Hook.png" },
-    { title: "Subway Surfers", url: "subway-surfers.html", category: "Skill", image: "Subway Surfers.png" },
-    { title: "Super Mario Bros", url: "super-mario-bros.html", category: "Arcade", image: "Super Mario Bros.png" },
+    { title: "Subway Surfers", url: "subway-surfers.html", category: "Arcade", image: "Subway Surfers.png" },
+    { title: "Super Mario Bros", url: "super-mario-bros.html", category: "Platformer", image: "Super Mario Bros.png" },
     { title: "Tax Fraud Simulator", url: "tax-fraud-simulator.html", category: "Simulation", image: "Tax Fraud Simulator.png" },
     { title: "Tax Fraud Simulator 2", url: "tax-fraud-simulator-2.html", category: "Simulation", image: "Tax Fraud Simulator 2.png" },
     { title: "Terraria", url: "terraria.html", category: "Sandbox", image: "Terraria.png" },
@@ -53,5 +53,5 @@ const games = [
     { title: "Tunnel Rush", url: "tunnel-rush.html", category: "Skill", image: "Tunnel Rush.png" },
     { title: "Vex", url: "vex/vex.html", category: "Platformer", image: "vex/Vex.png" },
     { title: "We Become What We Behold", url: "we-become-what-we-behold.html", category: "Funny", image: "We Become What We Behold.png" },
-    { title: "Zombie Last Survivor", url: "zombie-last-survivor.html", category: "Horror", image: "Zombie Last Survivor.png" }
+    { title: "Zombie Last Survivor", url: "zombie-last-survivor.html", category: "Action", image: "Zombie Last Survivor.png" }
 ]; 

@@ -30,6 +30,26 @@
 
     <main>
         <h1>Games</h1>
+
+        <div class="site-stats">
+            <div class="visits">
+                <h2>SITE VISITS</h2>
+                <img src="https://counter4.optistats.ovh/private/freecounterstat.php?c=lmcukkksahdyqn3huxtawxlfd5cjgap9" border="0" title="website counter" alt="website counter">
+            </div>
+            <div class="qr-code">
+                <img src="assets/images/qr/site qr.png" alt="QR Code">
+            </div>
+        </div>
+        
+        <!-- Favorites Instructions -->
+        <div class="favorites-instructions" id="favorites-instructions" style="display: none; opacity: 0;">
+            <div class="instruction-content">
+                <h3>💡 How to Use Favorites</h3>
+                <p>Click the star ⭐ on any game to add it to your favorites. Use the "Favorites" filter to see only your favorite games!</p>
+                <button onclick="hideFavoritesInstructions()" class="close-instructions">Got it!</button>
+            </div>
+        </div>
+        
         <div id="recently-played" class="recently-played-container" style="display: none;">
             <h2>Recently Played</h2>
             <div id="recently-played-grid" class="game-grid-recent">
@@ -52,175 +72,7 @@
     <button id="back-to-top-btn" title="Go to top">&uarr;</button>
 
     <script src="games/games-data.js?v=2"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const gameGrid = document.getElementById('game-grid');
-            const searchInput = document.getElementById('search-input');
-            const categoryFilters = document.getElementById('category-filters');
-
-            // --- Create Category Filters ---
-            const categories = ['All', ...new Set(games.map(game => game.category))];
-            categories.forEach(category => {
-                const button = document.createElement('button');
-                button.textContent = category;
-                button.classList.add('filter-btn');
-                if (category === 'All') {
-                    button.classList.add('active');
-                }
-                button.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    filterGames();
-                });
-                categoryFilters.appendChild(button);
-            });
-
-            // --- Display Recently Played Games ---
-            const displayRecentlyPlayed = () => {
-                const recentlyPlayed = JSON.parse(localStorage.getItem('recentlyPlayed')) || [];
-                const container = document.getElementById('recently-played');
-                const grid = document.getElementById('recently-played-grid');
-
-                if (recentlyPlayed.length === 0) {
-                    container.style.display = 'none';
-                    return;
-                }
-
-                container.style.display = 'block';
-                grid.innerHTML = '';
-
-                recentlyPlayed.forEach(game => {
-                    const gameCard = document.createElement('a');
-                    gameCard.href = `games/${game.url}`;
-                    gameCard.className = 'game-card';
-
-                    const removeBtn = document.createElement('button');
-                    removeBtn.className = 'remove-from-recent-btn';
-                    removeBtn.innerHTML = '&times;'; // The 'X' symbol
-                    removeBtn.title = 'Remove from recently played';
-
-                    removeBtn.addEventListener('click', (e) => {
-                        e.preventDefault(); // Stop navigation to game page
-                        e.stopPropagation(); // Stop card's main click event
-
-                        let currentRecentlyPlayed = JSON.parse(localStorage.getItem('recentlyPlayed')) || [];
-                        currentRecentlyPlayed = currentRecentlyPlayed.filter(item => item.title !== game.title);
-                        localStorage.setItem('recentlyPlayed', JSON.stringify(currentRecentlyPlayed));
-
-                        // Re-render the recently played section to reflect the removal
-                        displayRecentlyPlayed();
-                    });
-
-                    const imageContainer = document.createElement('div');
-                    imageContainer.className = 'game-image-container';
-
-                    const gameImage = document.createElement('img');
-                    gameImage.src = `assets/images/games/${game.image}`;
-                    gameImage.alt = game.title;
-                    gameImage.onerror = () => { gameImage.src = 'assets/images/placeholder.jpg'; };
-
-                    const gameTitle = document.createElement('h2');
-                    gameTitle.className = 'game-title';
-                    gameTitle.textContent = game.title;
-
-                    gameCard.appendChild(removeBtn);
-                    imageContainer.appendChild(gameImage);
-                    gameCard.appendChild(imageContainer);
-                    gameCard.appendChild(gameTitle);
-                    grid.appendChild(gameCard);
-                });
-            };
-
-            // --- Display Games ---
-            const displayGames = (filteredGames) => {
-                gameGrid.innerHTML = '';
-                const gamesToDisplay = filteredGames || games;
-
-                if (gamesToDisplay.length === 0) {
-                    gameGrid.innerHTML = '<p class="no-results" style="color: #00ff00;">No games found...</p>';
-                    return;
-                }
-
-                gamesToDisplay.forEach(game => {
-                    const gameCard = document.createElement('a');
-                    gameCard.href = `games/${game.url}`;
-                    gameCard.className = 'game-card';
-                    gameCard.setAttribute('data-category', game.category);
-
-                    // Save to recently played on click
-                    gameCard.addEventListener('click', () => {
-                        let recentlyPlayed = JSON.parse(localStorage.getItem('recentlyPlayed')) || [];
-                        const playedGame = {
-                            title: game.title,
-                            url: game.url,
-                            image: game.image
-                        };
-                        // Prevent duplicates
-                        recentlyPlayed = recentlyPlayed.filter(item => item.title !== playedGame.title);
-                        // Add to the front
-                        recentlyPlayed.unshift(playedGame);
-                        // Limit to 5 games
-                        recentlyPlayed = recentlyPlayed.slice(0, 5);
-                        // Save back to localStorage
-                        localStorage.setItem('recentlyPlayed', JSON.stringify(recentlyPlayed));
-                    });
-
-                    const imageContainer = document.createElement('div');
-                    imageContainer.className = 'game-image-container';
-
-                    const gameImage = document.createElement('img');
-                    gameImage.src = `assets/images/games/${game.image}`;
-                    gameImage.alt = game.title;
-                    gameImage.onerror = () => {
-                        gameImage.src = 'assets/images/placeholder.jpg';
-                    };
-
-                    const gameTitle = document.createElement('h2');
-                    gameTitle.className = 'game-title';
-                    gameTitle.textContent = game.title;
-
-                    imageContainer.appendChild(gameImage);
-                    gameCard.appendChild(imageContainer);
-                    gameCard.appendChild(gameTitle);
-                    gameGrid.appendChild(gameCard);
-                });
-            };
-
-            // --- Filter and Search ---
-            const filterGames = () => {
-                const searchTerm = searchInput.value.toLowerCase();
-                const activeCategory = document.querySelector('.filter-btn.active').textContent;
-
-                const filteredGames = games.filter(game => {
-                    const matchesCategory = activeCategory === 'All' || game.category === activeCategory;
-                    const matchesSearch = game.title.toLowerCase().includes(searchTerm);
-                    return matchesCategory && matchesSearch;
-                });
-
-                displayGames(filteredGames);
-            };
-
-            searchInput.addEventListener('input', filterGames);
-            displayGames();
-            displayRecentlyPlayed();
-
-            // --- Back to Top Button ---
-            const backToTopBtn = document.getElementById('back-to-top-btn');
-
-            window.onscroll = () => {
-                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                    backToTopBtn.classList.add('show');
-                } else {
-                    backToTopBtn.classList.remove('show');
-                }
-            };
-
-            backToTopBtn.addEventListener('click', () => {
-                document.body.scrollTop = 0; // For Safari
-                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-            });
-        });
-    </script>
+    <script src="favorites.js?v=1"></script>
     <script src="app.js?v=1"></script>
 </body>
 </html>
