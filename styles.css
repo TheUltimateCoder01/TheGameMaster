@@ -647,7 +647,7 @@ footer p {
 .game-card .favorite-btn {
     position: absolute;
     top: 10px;
-    right: 10px;
+    left: 10px;
     background: rgba(0, 0, 0, 0.8);
     color: #ffffff;
     border: 2px solid #ffffff;
@@ -670,7 +670,7 @@ footer p {
 }
 
 .game-card .favorite-btn.favorited {
-    color: #ffd700; /* Gold color for favorited star */
+    color: #ffd700;
     background: rgba(0, 0, 0, 0.9);
     border-color: #ffd700;
     opacity: 1;
@@ -707,101 +707,6 @@ footer p {
 }
 
 /* Favorites Instructions Styling */
-.favorites-instructions {
-    background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(255, 215, 0, 0.1));
-    border: 2px solid #00ff00;
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px 0;
-    text-align: center;
-    transition: opacity 0.3s ease;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
-}
-
-.favorites-instructions h3 {
-    color: #00ff00;
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.favorites-instructions p {
-    color: #00ff00;
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    line-height: 1.5;
-}
-
-.close-instructions {
-    background: #00ff00;
-    color: #000000;
-    border: 2px solid #00ff00;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.close-instructions:hover {
-    background: #000000;
-    color: #00ff00;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
-    transform: translateY(-2px);
-} 
-/* Favorites Button and Instructions Styling */
-.game-card .favorite-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
-    line-height: 31px;
-    text-align: center;
-    cursor: pointer;
-    opacity: 0;
-    transition: all 0.3s ease;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.game-card:hover .favorite-btn {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-.game-card .favorite-btn.favorited {
-    color: #ffd700;
-    background: rgba(0, 0, 0, 0.9);
-    border-color: #ffd700;
-    opacity: 1;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-}
-
-.game-card .favorite-btn:hover {
-    transform: scale(1.2);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-}
-
-@keyframes favoritePulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.3); }
-    100% { transform: scale(1); }
-}
-
-.favorite-btn.animating {
-    animation: favoritePulse 0.3s ease-in-out;
-}
-
 .favorites-instructions {
     background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(255, 215, 0, 0.1));
     border: 2px solid #00ff00;
