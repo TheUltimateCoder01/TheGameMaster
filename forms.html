@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Request - The Game Master</title>
+    <link rel="icon" href="assets/images/Game Masters Logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=14">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        emailjs.init({
+            publicKey: '-ruybGF4u4YgAt78O',
+        });
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1846703614434217"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="assets/images/Game Masters Logo.png" alt="The Game Master Logo" class="logo-img">
+                The Game Master
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="games.html">Games</a>
+            <a href="cheats.html">Cheats</a>
+            <a href="forms.html" class="active">Forms</a>
+        </div>
+    </nav>
+
+    <main>
+        <h1>Forms</h1>
+        
+        <div class="site-stats">
+            <div class="visits">
+                <h2>SITE VISITS</h2>
+                <img src="https://counter4.optistats.ovh/private/freecounterstat.php?c=lmcukkksahdyqn3huxtawxlfd5cjgap9" border="0" title="website counter" alt="website counter">
+            </div>
+            <div class="qr-code">
+                <img src="assets/images/qr/site qr.png" alt="QR Code">
+            </div>
+        </div>
+
+        <div class="forms-section">
+            <h2>Submit Your Suggestions</h2>
+            <div class="form-container">
+                <form id="suggestionForm">
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="game">New Game Suggestion</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Last Updated: 6/20/2025</p>
+    </footer>
+    <script src="app.js?v=1"></script>
+    <script>
+        const suggestionForm = document.getElementById('suggestionForm');
+        const submitBtn = suggestionForm.querySelector('.submit-btn');
+        const originalBtnText = submitBtn.textContent;
+
+        suggestionForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            emailjs.sendForm('service_byxonot', 'template_elk1qxg', this)
+                .then(function() {
+                    submitBtn.textContent = 'Suggestion Sent!';
+                    suggestionForm.reset();
+                    setTimeout(() => {
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+                    }, 3000);
+                }, function(error) {
+                    submitBtn.textContent = 'Failed to Send';
+                    alert('Oops... An error occurred. Please try again.');
+                    setTimeout(() => {
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+                    }, 3000);
+                });
+        });
+    </script>
+</body>
+</html> 

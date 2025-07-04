@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - The Game Master</title>
+    <link rel="icon" href="assets/images/Game Masters Logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=15">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1846703614434217"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="assets/images/Game Masters Logo.png" alt="The Game Master Logo" class="logo-img">
+                The Game Master
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="games.html" class="active">Games</a>
+            <a href="cheats.html">Cheats</a>
+            <a href="forms.html">Forms</a>
+        </div>
+    </nav>
+
+    <!-- Horizontal Ads -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-1846703614434217"
+         data-ad-slot="9959921892"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <main>
+        <h1>Games</h1>
+
+        <div class="site-stats">
+            <div class="visits">
+                <h2>SITE VISITS</h2>
+                <img src="https://counter4.optistats.ovh/private/freecounterstat.php?c=lmcukkksahdyqn3huxtawxlfd5cjgap9" border="0" title="website counter" alt="website counter">
+            </div>
+            <div class="qr-code">
+                <img src="assets/images/qr/site qr.png" alt="QR Code">
+            </div>
+        </div>
+        
+        <!-- Favorites Instructions -->
+        <div class="favorites-instructions" id="favorites-instructions" style="display: none; opacity: 0;">
+            <div class="instruction-content">
+                <h3>💡 How to Use Favorites</h3>
+                <p>Click the star ⭐ on any game to add it to your favorites. Use the "Favorites" filter to see only your favorite games!</p>
+                <button onclick="hideFavoritesInstructions()" class="close-instructions">Got it!</button>
+            </div>
+        </div>
+        
+        <div id="recently-played" class="recently-played-container" style="display: none;">
+            <h2>Recently Played</h2>
+            <div id="recently-played-grid" class="game-grid-recent">
+                <!-- Recently played games will be inserted here -->
+            </div>
+        </div>
+        <div id="category-filters"></div>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search for a game...">
+        </div>
+        <div class="game-grid" id="game-grid">
+            <!-- Game cards will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>Last Updated: 6/20/2025</p>
+    </footer>
+
+    <button id="back-to-top-btn" title="Go to top">&uarr;</button>
+
+    <script src="games/games-data.js?v=2"></script>
+    <script src="favorites.js?v=1"></script>
+    <script src="app.js?v=1"></script>
+</body>
+</html>

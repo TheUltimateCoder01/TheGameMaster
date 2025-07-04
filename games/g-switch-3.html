@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-Switch 3 - The Game Master</title>
+    <link rel="icon" href="../assets/images/Game Masters Logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css?v=14">
+    <link rel="stylesheet" href="game-page.css?v=4">
+</head>
+<body>
+    <header>
+        <nav class="top-nav">
+            <div class="nav-logo">
+                <a href="../index.html">
+                    <img src="../assets/images/Game Masters Logo.png" alt="The Game Master Logo" class="logo-img">
+                    The Game Master
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../games.html" class="active">Games</a>
+                <a href="../forms.html">Forms</a>
+                <a href="../cheats.html">Cheats</a>
+            </div>
+        </nav>
+    </header>
+    <main class="game-page">
+        <div class="game-container">
+            <iframe src="https://www.twoplayergames.org/embed/g-switch-3"
+                    frameborder="0" 
+                    allowfullscreen
+                    allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            <button class="fullscreen-btn" onclick="toggleFullscreen()">Play in Fullscreen</button>
+        </div>
+    </main>
+    <footer>
+        <p>Last Updated: 6/20/2025</p>
+    </footer>
+    <script>
+        function toggleFullscreen() {
+            const iframe = document.querySelector('iframe');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        }
+    </script>
+    <script src="../app.js"></script>
+</body>
+</html> 
