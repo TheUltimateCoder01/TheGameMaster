@@ -25,6 +25,28 @@
             <a href="games.html" class="active">Games</a>
             <a href="cheats.html">Cheats</a>
             <a href="forms.html">Forms</a>
+            <div id="profile-menu-container">
+                <div id="profile-icon" class="profile-icon" title="Account">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <div id="profile-dropdown" class="profile-dropdown" style="display: none;">
+                    <!-- Guest menu -->
+                    <div id="guest-menu" class="menu-section">
+                        <button id="login-btn" class="dropdown-btn">🔑 Login</button>
+                        <button id="signup-btn" class="dropdown-btn">✨ Sign Up</button>
+                    </div>
+                    <!-- User menu -->
+                    <div id="user-menu" class="menu-section" style="display: none;">
+                        <div id="user-info">
+                            <span id="user-greeting">Welcome!</span>
+                        </div>
+                        <button id="profile-btn" class="dropdown-btn">👤 Profile</button>
+                        <button id="logout-btn" class="dropdown-btn">🚪 Logout</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
     <div class="sidebar-ad">
@@ -86,6 +108,7 @@
 
     <script src="games/games-data.js?v=2"></script>
     <script src="favorites.js?v=1"></script>
+    <script src="auth-system.js"></script>
     <script src="app.js?v=1"></script>
 </body>
 </html>
