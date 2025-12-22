@@ -112,13 +112,18 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('DOMContentLoaded', function() {
     var nav = document.querySelector('.top-nav');
     var navLinks = document.querySelector('.nav-links');
-    if (!document.querySelector('.hamburger')) {
-        var hamburger = document.createElement('div');
+    var hamburger = document.querySelector('.hamburger');
+    
+    // Create hamburger if it doesn't exist
+    if (!hamburger) {
+        hamburger = document.createElement('div');
         hamburger.className = 'hamburger';
         hamburger.innerHTML = '<span></span><span></span><span></span>';
         nav.querySelector('.nav-logo').appendChild(hamburger);
-        hamburger.addEventListener('click', function() {
-            navLinks.classList.toggle('mobile-active');
-        });
     }
+    
+    // Always add click listener
+    hamburger.addEventListener('click', function() {
+        navLinks.classList.toggle('mobile-active');
+    });
 }); 
