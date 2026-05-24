@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css?v=14">
-    <link rel="stylesheet" href="game-page.css?v=4">
+    <link rel="stylesheet" href="game-page.css?v=6">
 </head>
 <body>
     <header>
@@ -42,7 +42,7 @@
     </div>
     <main class="game-page">
         <div class="game-container">
-            <iframe src="https://thepizzaedition.github.io/testmkl/mkmart/"
+            <iframe src="https://monkey-mart.gamestores.fun/"
                     frameborder="0" 
                     allowfullscreen
                     allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
@@ -52,18 +52,7 @@
     <footer>
         <p>Last Updated: 6/20/2025</p>
     </footer>
-    <script>
-        function toggleFullscreen() {
-            const iframe = document.querySelector('iframe');
-            if (iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe.webkitRequestFullscreen) {
-                iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) {
-                iframe.msRequestFullscreen();
-            }
-        }
-    </script>
+    <script src="game-fullscreen.js?v=2"></script>
     <script src="../app.js"></script>
 </body>
 </html>
