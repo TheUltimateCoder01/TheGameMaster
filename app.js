@@ -4,15 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Only run this script if the gamesGrid container exists on the page
     if (gamesGrid) {
         // Create game cards without sorting
-        games.forEach(game => {
+        games.filter(game => !game.hidden).forEach(game => {
             const gameCard = document.createElement('a');
             gameCard.href = `games/${game.url}`;
             gameCard.className = 'game-card';
             
-            // Special case for Vex - use Vex 8 image
             let imageUrl;
-            if (game.title === "Vex") {
-                imageUrl = `assets/images/games/vex/Vex 8.png`;
+            if (game.title === "Vex" || game.title.startsWith("Vex ")) {
+                imageUrl = `assets/images/games/vex/${game.title}.png`;
             } else {
                 // Try both formats for image URL - with spaces and with hyphens
                 const imageUrlWithSpaces = `assets/images/games/${game.title}.png`;
@@ -29,8 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // If image fails to load, try hyphenated version, then fallback to initials
             img.onerror = function() {
-                // For Vex, don't try alternative paths since we're using a specific image
-                if (game.title === "Vex") {
+                if (game.title === "Vex" || game.title.startsWith("Vex ")) {
                     this.onerror = function() {
                         this.style.height = '150px';
                         this.style.width = '150px';

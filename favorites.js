@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayGames = (filteredGames) => {
         if (!gameGrid) return;
         gameGrid.innerHTML = '';
-        const gamesToDisplay = filteredGames || games;
+        const gamesToDisplay = filteredGames || games.filter(game => !game.hidden);
 
         if (gamesToDisplay.length === 0) {
             const activeFilter = document.querySelector('.filter-btn.active').textContent;
@@ -239,13 +239,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterGames = () => {
         const searchTerm = searchInput.value.toLowerCase();
         const activeCategory = document.querySelector('.filter-btn.active').textContent;
-        let filteredGames = games;
+
+        // Hidden games only appear when searching; noSearch games are excluded when searching
+        let filteredGames = searchTerm
+            ? games.filter(game => !game.noSearch)
+            : games.filter(game => !game.hidden);
 
         if (activeCategory.includes('Favorites')) {
             const favoriteTitles = favorites.map(fav => fav.title);
+            // Search all games including hidden ones so favorited hidden games still appear
             filteredGames = games.filter(game => favoriteTitles.includes(game.title));
         } else if (activeCategory !== 'All') {
-            filteredGames = games.filter(game => game.category === activeCategory);
+            filteredGames = filteredGames.filter(game => game.category === activeCategory);
         }
 
         if (searchTerm) {
@@ -277,8 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
         backToTopBtn.addEventListener('click', () => {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
