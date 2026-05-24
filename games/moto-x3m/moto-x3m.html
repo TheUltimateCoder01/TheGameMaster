@@ -58,5 +58,47 @@
         <p>Last Updated: 6/20/2025</p>
     </footer>
     <script src="../../app.js"></script>
+    <script>
+        const MOTO_GAMES = [
+            { title: "Moto X3M", url: "moto-x3m/moto-x3m-game.html", image: "moto-x3m/Moto X3M.png" },
+            { title: "Moto X3M Spooky Land", url: "moto-x3m/moto-x3m-spooky-land.html", image: "moto-x3m/Moto X3M Spooky Land.png" },
+        ];
+
+        function getFavorites() {
+            return JSON.parse(localStorage.getItem('favoriteGames')) || [];
+        }
+
+        function isFavorited(title) {
+            return getFavorites().some(fav => fav.title === title);
+        }
+
+        function toggleFavorite(game, btn) {
+            let favs = getFavorites();
+            const idx = favs.findIndex(f => f.title === game.title);
+            if (idx > -1) {
+                favs.splice(idx, 1);
+                btn.innerHTML = '&#9734;';
+                btn.classList.remove('favorited');
+            } else {
+                favs.push(game);
+                btn.innerHTML = '&#9733;';
+                btn.classList.add('favorited');
+            }
+            localStorage.setItem('favoriteGames', JSON.stringify(favs));
+        }
+
+        document.querySelectorAll('.moto-x3m-game-card').forEach((card, i) => {
+            const game = MOTO_GAMES[i];
+            const btn = document.createElement('button');
+            btn.className = 'favorite-btn';
+            btn.innerHTML = isFavorited(game.title) ? '&#9733;' : '&#9734;';
+            if (isFavorited(game.title)) btn.classList.add('favorited');
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleFavorite(game, btn);
+            });
+            card.appendChild(btn);
+        });
+    </script>
 </body>
 </html>

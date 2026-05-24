@@ -94,5 +94,53 @@
         <p>Last Updated: 6/20/2025</p>
     </footer>
     <script src="../../app.js"></script>
+    <script>
+        const VEX_GAMES = [
+            { title: "Vex 1", url: "vex/vex1.html", image: "vex/Vex 1.png" },
+            { title: "Vex 2", url: "vex/vex2.html", image: "vex/Vex 2.png" },
+            { title: "Vex 3", url: "vex/vex3.html", image: "vex/Vex 3.png" },
+            { title: "Vex 4", url: "vex/vex4.html", image: "vex/Vex 4.png" },
+            { title: "Vex 5", url: "vex/vex5.html", image: "vex/Vex 5.png" },
+            { title: "Vex 6", url: "vex/vex6.html", image: "vex/Vex 6.png" },
+            { title: "Vex 7", url: "vex/vex7.html", image: "vex/Vex 7.png" },
+            { title: "Vex 8", url: "vex/vex8.html", image: "vex/Vex 8.png" },
+        ];
+
+        function getFavorites() {
+            return JSON.parse(localStorage.getItem('favoriteGames')) || [];
+        }
+
+        function isFavorited(title) {
+            return getFavorites().some(fav => fav.title === title);
+        }
+
+        function toggleFavorite(game, btn) {
+            let favs = getFavorites();
+            const idx = favs.findIndex(f => f.title === game.title);
+            if (idx > -1) {
+                favs.splice(idx, 1);
+                btn.innerHTML = '&#9734;';
+                btn.classList.remove('favorited');
+            } else {
+                favs.push(game);
+                btn.innerHTML = '&#9733;';
+                btn.classList.add('favorited');
+            }
+            localStorage.setItem('favoriteGames', JSON.stringify(favs));
+        }
+
+        document.querySelectorAll('.vex-game-card').forEach((card, i) => {
+            const game = VEX_GAMES[i];
+            const btn = document.createElement('button');
+            btn.className = 'favorite-btn';
+            btn.innerHTML = isFavorited(game.title) ? '&#9733;' : '&#9734;';
+            if (isFavorited(game.title)) btn.classList.add('favorited');
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleFavorite(game, btn);
+            });
+            card.appendChild(btn);
+        });
+    </script>
 </body>
 </html>
