@@ -737,26 +737,36 @@ footer p {
 
 .remove-from-recent-btn {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 24px;
-    height: 24px;
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     background-color: #ff0000;
     color: white;
     border: 2px solid white;
     border-radius: 50%;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    line-height: 20px;
-    text-align: center;
+    line-height: 1;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    transition: all 0.3s ease;
     z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .game-grid-recent .game-card:hover .remove-from-recent-btn {
     opacity: 1;
+    transform: scale(1.1);
+}
+
+.game-grid-recent .game-card .remove-from-recent-btn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
 }
 
 .game-grid {
