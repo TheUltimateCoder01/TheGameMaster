@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Create Category Filters ---
     if (categoryFilters) {
-        const categories = ['All', 'Favorites', ...new Set(games.map(game => game.category))];
+        const categories = ['All', 'Favorites', '2-PLAYER', ...new Set(games.map(game => game.category))];
         categories.forEach(category => {
             const button = document.createElement('button');
             button.textContent = category;
@@ -249,6 +249,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const favoriteTitles = favorites.map(fav => fav.title);
             // Search all games including hidden ones so favorited hidden games still appear
             filteredGames = games.filter(game => favoriteTitles.includes(game.title));
+        } else if (activeCategory === '2-PLAYER') {
+            filteredGames = filteredGames.filter(game => game.twoPlayer);
         } else if (activeCategory !== 'All') {
             filteredGames = filteredGames.filter(game => game.category === activeCategory);
         }
