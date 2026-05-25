@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=14">
+    <link rel="stylesheet" href="styles.css?v=16">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1846703614434217"
      crossorigin="anonymous"></script>
     <link rel="manifest" href="manifest.json">
@@ -25,6 +25,9 @@
                 <span></span>
                 <span></span>
             </div>
+        </div>
+        <div class="nav-center">
+            <button class="about-blank-btn" onclick="openAboutBlank()">Open in about:blank</button>
         </div>
         <div class="nav-links">
             <a href="index.html" class="active">Home</a>
@@ -101,6 +104,15 @@
     <script src="auth-system.js"></script>
     <script src="app.js"></script>
     <script>
+        function openAboutBlank() {
+            const w = window.open('about:blank', '_blank');
+            const iframe = w.document.createElement('iframe');
+            iframe.src = window.location.href;
+            iframe.style.cssText = 'width:100%;height:100%;border:none;position:fixed;top:0;left:0;';
+            w.document.body.style.cssText = 'margin:0;padding:0;overflow:hidden;';
+            w.document.body.appendChild(iframe);
+        }
+
         function openRandomSites() {
             var validGames = games.filter(function(game) {
                 return !game.url.startsWith('http');

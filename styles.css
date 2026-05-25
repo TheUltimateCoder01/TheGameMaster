@@ -23,6 +23,13 @@ body {
     padding: 1rem;
     background-color: #000000;
     border-bottom: 1px solid #00ff00;
+    position: relative;
+}
+
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-logo a {
@@ -37,6 +44,26 @@ body {
 .nav-links {
     display: flex;
     gap: 1rem;
+}
+
+.about-blank-btn {
+    background: transparent;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.about-blank-btn:hover {
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+    transform: translateY(-2px);
 }
 
 .top-nav a {
@@ -863,18 +890,6 @@ footer p {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
 }
 
-/* Enhanced filter button styling for favorites */
-.filter-btn:contains("Favorites") {
-    background: linear-gradient(45deg, #ffd700, #ffed4e);
-    color: #000000;
-    font-weight: 600;
-    border: 2px solid #ffd700;
-}
-
-.filter-btn:contains("Favorites"):hover {
-    background: linear-gradient(45deg, #ffed4e, #ffd700);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-}
 
 /* Animation for adding/removing favorites */
 @keyframes favoritePulse {
