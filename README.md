@@ -53,19 +53,6 @@ The Game Master/
 
 ---
 
-## Adding a New Game
-
-1. Add an entry to `games/games-data.js`:
-```js
-{ title: "Game Name", url: "game-name.html", category: "Category", image: "Game Name.png" }
-```
-
-2. Add a thumbnail image to `assets/images/games/`
-
-3. Create `games/game-name.html` — copy any existing game page and update the iframe `src`
-
----
-
 ## Features
 
 - 50+ free games, no downloads required
