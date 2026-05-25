@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vex - The Game Master</title>
+    <link rel="icon" href="../../assets/images/Game Masters Logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css?v=14">
+    <link rel="stylesheet" href="vex-menu.css?v=1">
+    
+</head>
+<body>
+    <header>
+        <nav class="top-nav">
+            <div class="nav-logo">
+                <a href="../../index.html">
+                    <img src="../../assets/images/Game Masters Logo.png" alt="The Game Master Logo" class="logo-img">
+                    The Game Master
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="../../index.html">Home</a>
+                <a href="../../games.html" class="active">Games</a>
+                <a href="../../forms.html">Forms</a>
+                <a href="../../cheats.html">Cheats</a>
+            </div>
+        </nav></header>
+    <div class="horizontal-ad">
+      <!-- Horizontal -->
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1846703614434217"
+        crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+        style="display:inline-block;width:728px;height:90px"
+        data-ad-client="ca-pub-1846703614434217"
+        data-ad-slot="2677727042"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+    <main class="vex-menu">
+        <a href="vex1.html" class="vex-game-card">
+            <div class="vex-game-image-container">
+                <img src="../../assets/images/games/vex/Vex 1.png" alt="Vex 1">
+            </div>
+            <h2 class="vex-game-title">Vex 1</h2>
+        </a>
+        <a href="vex2.html" class="vex-game-card">
+            <div class="vex-game-image-container">
+                <img src="../../assets/images/games/vex/Vex 2.png" alt="Vex 2">
+            </div>
+            <h2 class="vex-game-title">Vex 2</h2>
+        </a>
+        <a href="vex3.html" class="vex-game-card">
+            <div class="vex-game-image-container">
+                <img src="../../assets/images/games/vex/Vex 3.png" alt="Vex 3">
+            </div>
+            <h2 class="vex-game-title">Vex 3</h2>
+        </a>
+        <a href="vex4.html" class="vex-game-card">
+            <div class="vex-game-image-container">
+                <img src="../../assets/images/games/vex/Vex 4.png" alt="Vex 4">
+            </div>
+            <h2 class="vex-game-title">Vex 4</h2>
+        </a>
+        <a href="vex5.html" class="vex-game-card">
+            <div class="vex-game-image-container">
+                <img src="../../assets/images/games/vex/Vex 5.png" alt="Vex 5">
+            </div>
+            <h2 class="vex-game-title">Vex 5</h2>
+        </a>
+        <a href="vex6.html" class="vex-game-card">
+            <div class="vex-game-image-container">
+                <img src="../../assets/images/games/vex/Vex 6.png" alt="Vex 6">
+            </div>
+            <h2 class="vex-game-title">Vex 6</h2>
+        </a>
+        <a href="vex7.html" class="vex-game-card">
+            <div class="vex-game-image-container">
+                <img src="../../assets/images/games/vex/Vex 7.png" alt="Vex 7">
+            </div>
+            <h2 class="vex-game-title">Vex 7</h2>
+        </a>
+        <a href="vex8.html" class="vex-game-card">
+            <div class="vex-game-image-container">
+                <img src="../../assets/images/games/vex/Vex 8.png" alt="Vex 8">
+            </div>
+            <h2 class="vex-game-title">Vex 8</h2>
+        </a>
+    </main>
+    <footer>
+        <p>Site Last Updated: 5/25/2026</p>
+    </footer>
+    <script src="../../app.js"></script>
+    <script>
+        const VEX_GAMES = [
+            { title: "Vex 1", url: "vex/vex1.html", image: "vex/Vex 1.png" },
+            { title: "Vex 2", url: "vex/vex2.html", image: "vex/Vex 2.png" },
+            { title: "Vex 3", url: "vex/vex3.html", image: "vex/Vex 3.png" },
+            { title: "Vex 4", url: "vex/vex4.html", image: "vex/Vex 4.png" },
+            { title: "Vex 5", url: "vex/vex5.html", image: "vex/Vex 5.png" },
+            { title: "Vex 6", url: "vex/vex6.html", image: "vex/Vex 6.png" },
+            { title: "Vex 7", url: "vex/vex7.html", image: "vex/Vex 7.png" },
+            { title: "Vex 8", url: "vex/vex8.html", image: "vex/Vex 8.png" },
+        ];
+
+        function getFavorites() {
+            return JSON.parse(localStorage.getItem('favoriteGames')) || [];
+        }
+
+        function isFavorited(title) {
+            return getFavorites().some(fav => fav.title === title);
+        }
+
+        function toggleFavorite(game, btn) {
+            let favs = getFavorites();
+            const idx = favs.findIndex(f => f.title === game.title);
+            if (idx > -1) {
+                favs.splice(idx, 1);
+                btn.innerHTML = '&#9734;';
+                btn.classList.remove('favorited');
+            } else {
+                favs.push(game);
+                btn.innerHTML = '&#9733;';
+                btn.classList.add('favorited');
+            }
+            localStorage.setItem('favoriteGames', JSON.stringify(favs));
+        }
+
+        document.querySelectorAll('.vex-game-card').forEach((card, i) => {
+            const game = VEX_GAMES[i];
+            const btn = document.createElement('button');
+            btn.className = 'favorite-btn';
+            btn.innerHTML = isFavorited(game.title) ? '&#9733;' : '&#9734;';
+            if (isFavorited(game.title)) btn.classList.add('favorited');
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleFavorite(game, btn);
+            });
+            card.appendChild(btn);
+        });
+    </script>
+</body>
+</html>
