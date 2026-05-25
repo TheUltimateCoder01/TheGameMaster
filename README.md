@@ -1,36 +1,86 @@
-# The Game Master Website
+# The Game Master
 
-A modern recreation of the Game Master website featuring a collection of browser-based games.
+> Free browser-based games. No downloads. No limits.
 
-## Setup
+---
 
-1. Clone this repository
-2. Open `index.html` in your web browser
-3. No build process required - it's a simple static website
+## What is this?
+
+The Game Master is a collection of 50+ free browser games playable instantly — no installs, no accounts required. Built as a static website with a clean green-on-black UI.
+
+---
+
+## Games
+
+| Category | Examples |
+|---|---|
+| Action | 1v1.LOL, Epic Ninja, Gun Spin, Zombie Last Survivor |
+| Arcade | Flappy Bird, Geometry Dash, Pac-Man, Subway Surfers |
+| Driving | Drift Boss, Drive Mad, Moto X3M |
+| Multiplayer | Among Us, JustFall.LOL, Powerline.io, Snake.io |
+| Platformer | Super Mario Bros, Vex 1–8 |
+| Puzzle | 2048, Fireboy & Watergirl, Maze, The Impossible Quiz |
+| Sandbox | Eaglercraft, Terraria |
+| Simulation | Cookie Clicker, Idle Breakout, Monkey Mart |
+| Skill | Cluster Rush, Run 3, Slope, Stickman Hook |
+| Sports | Basket Random, Golf Orbit, Retro Bowl |
+| Strategy | Chess, Plants vs Zombies |
+| + more | Happy Wheels, Henry Stickman, Jelly Mario... |
+
+---
 
 ## Structure
 
-- `index.html` - Main page
-- `styles.css` - All styling
-- `app.js` - Main JavaScript functionality
-- `games/` - Directory containing game data and individual game pages
-- `assets/` - Directory containing images and other static assets
+```
+The Game Master/
+├── index.html              # Home page
+├── games.html              # Games browser with search & filters
+├── cheats.html             # Game cheats & console tricks
+├── forms.html              # Game request / feedback form
+├── styles.css              # Global styles
+├── app.js                  # Search, filters, game grid logic
+├── auth-system.js          # User login / profile system
+├── favorites.js            # Favorites functionality
+├── games/
+│   ├── games-data.js       # Master game list (add new games here)
+│   ├── game-page.css       # Shared game page styles
+│   ├── game-fullscreen.js  # Fullscreen toggle logic
+│   └── *.html              # Individual game pages
+└── assets/
+    └── images/
+        └── games/          # Game thumbnail images
+```
 
-## Adding New Games
+---
 
-To add a new game:
+## Adding a New Game
 
-1. Add the game data to `games/games-data.js`
-2. Add the game's image to `assets/images/`
-3. Create a new game page in the `games/` directory
+1. Add an entry to `games/games-data.js`:
+```js
+{ title: "Game Name", url: "game-name.html", category: "Category", image: "Game Name.png" }
+```
+
+2. Add a thumbnail image to `assets/images/games/`
+
+3. Create `games/game-name.html` — copy any existing game page and update the iframe `src`
+
+---
 
 ## Features
 
-- Responsive design
-- Game search functionality
-- Modern UI with hover effects
-- Mobile-friendly navigation
+- 50+ free games, no downloads required
+- Search and category filters
+- Favorites system (star any game to save it)
+- Recently played tracking
+- User accounts and profiles
+- "Open in about:blank" tab disguise button
+- Fullscreen mode on every game
+- Game cheats & console tricks page
+- Game request form (EmailJS)
+- PWA support (installable)
 
-## Contributing
+---
 
-Feel free to submit issues and enhancement requests! 
+## Tech Stack
+
+Pure HTML, CSS, and vanilla JavaScript. No frameworks, no build tools, no dependencies.
