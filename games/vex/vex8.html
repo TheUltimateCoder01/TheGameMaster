@@ -21,7 +21,10 @@
                     The Game Master
                 </a>
             </div>
-            <div class="nav-links">
+            <div class="nav-center">
+            <button class="about-blank-btn" onclick="openAboutBlank()">Open in about:blank</button>
+        </div>
+        <div class="nav-links">
                 <a href="../../index.html">Home</a>
                 <a href="../../games.html" class="active">Games</a>
                 <a href="../../forms.html">Forms</a>
@@ -54,5 +57,15 @@
     </footer>
     <script src="../game-fullscreen.js?v=2"></script>
     <script src="../../app.js"></script>
+    <script>
+        function openAboutBlank() {
+            const w = window.open('about:blank', '_blank');
+            const iframe = w.document.createElement('iframe');
+            iframe.src = window.location.href;
+            iframe.style.cssText = 'width:100%;height:100%;border:none;position:fixed;top:0;left:0;';
+            w.document.body.style.cssText = 'margin:0;padding:0;overflow:hidden;';
+            w.document.body.appendChild(iframe);
+        }
+    </script>
 </body>
 </html>

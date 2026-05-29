@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Remove-Item -Path \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\\\\hobo-simulator.html\" -Confirm:$false)",
+      "PowerShell(Remove-Item -Path \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\\\\idle-miner-tycoon.html\" -Confirm:$false)",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\\\\lows-adventure\")",
+      "PowerShell(Remove-Item -Path \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\\\\lows-adventure.html\" -Confirm:$false)",
+      "PowerShell(Remove-Item -Path \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\\\\lows-adventure-2.html\" -Confirm:$false)",
+      "PowerShell(Remove-Item -Path \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\\\\tax-fraud-simulator-2.html\" -Confirm:$false)",
+      "WebFetch(domain:gn-math.dev)",
+      "PowerShell(Remove-Item -Path \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\\\\slope-embed.html\" -Confirm:$false)",
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\" | Where-Object { $_.Extension -eq \".png\" } | Select-Object Name)",
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\assets\\\\images\\\\games\" | Where-Object { !$_.PSIsContainer } | Select-Object Name)",
+      "PowerShell($path = \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\assets\\\\images\\\\games\"; [System.IO.Directory]::GetDirectories\\($path\\) | ForEach-Object { [System.IO.Path]::GetFileName\\($_\\) })",
+      "PowerShell($vexPath = \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\\\\vex\"; [System.IO.Directory]::GetFiles\\($vexPath\\) | ForEach-Object { [System.IO.Path]::GetFileName\\($_\\) })",
+      "PowerShell($motoPath = \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\\\\moto-x3m\"; [System.IO.Directory]::GetFiles\\($motoPath\\) | ForEach-Object { [System.IO.Path]::GetFileName\\($_\\) })",
+      "PowerShell($assetVex = \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\assets\\\\images\\\\games\\\\vex\"; [System.IO.Directory]::GetFiles\\($assetVex\\) | ForEach-Object { [System.IO.Path]::GetFileName\\($_\\) }; Write-Host \"---\"; $assetMoto = \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\assets\\\\images\\\\games\\\\moto-x3m\"; [System.IO.Directory]::GetFiles\\($assetMoto\\) | ForEach-Object { [System.IO.Path]::GetFileName\\($_\\) })",
+      "PowerShell($lowsPath = \"c:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\\\\lows-adventure\"; [System.IO.Directory]::GetFiles\\($lowsPath\\) | ForEach-Object { [System.IO.Path]::GetFileName\\($_\\) })",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\" -Recurse -File | Select-Object FullName, @{Name=\"SizeKB\";Expression={[math]::Round\\($_.Length/1KB, 2\\)}} | Sort-Object FullName)",
+      "PowerShell(ls -Path \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\games\" -Recurse -File | Select-Object FullName, @{Name=\"SizeKB\";Expression={[math]::Round\\($_.Length/1KB, 2\\)}})",
+      "PowerShell(ls -Path \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\assets\" -Recurse -File | Select-Object FullName, @{Name=\"SizeKB\";Expression={[math]::Round\\($_.Length/1KB, 2\\)}})",
+      "PowerShell(ls -Path \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\.claude\" -Recurse -File | Select-Object FullName, @{Name=\"SizeKB\";Expression={[math]::Round\\($_.Length/1KB, 2\\)}})",
+      "PowerShell(ls -Path \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\assets\\\\images\\\\games\" | Select-Object Name, @{Name=\"SizeKB\";Expression={[math]::Round\\($_.Length/1KB, 2\\)}})",
+      "PowerShell(ls -Path \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\assets\\\\images\\\\qr\" | Select-Object Name, @{Name=\"SizeKB\";Expression={[math]::Round\\($_.Length/1KB, 2\\)}})",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\assets\\\\images\\\\games\" -Recurse | ForEach-Object { \"{0} \\({1} KB\\)\" -f $_.FullName, [math]::Round\\($_.Length/1KB, 2\\) })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\\\\assets\\\\images\\\\qr\" -Recurse | ForEach-Object { \"{0} \\({1} KB\\)\" -f $_.FullName, [math]::Round\\($_.Length/1KB, 2\\) })",
+      "PowerShell(robocopy \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\" \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\TheGameMaster\" /E /XD .git /NFL /NDL /NJH /NJS)",
+      "PowerShell(robocopy \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\" \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\TheGameMaster\" /E /XD .git)",
+      "PowerShell(robocopy \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\The Game Master\" \"C:\\\\Users\\\\krish_pyc2ot4\\\\Downloads\\\\TheGameMaster\" /E /XD .git /IS /IT /IM; Write-Host \"Done. Files copied: $\\($LASTEXITCODE\\)\")"
+    ]
+  }
+}
