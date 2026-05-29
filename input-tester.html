@@ -1,0 +1,1053 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Tester - The Game Master</title>
+    <link rel="icon" href="assets/images/Game Masters Logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=16">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1846703614434217" crossorigin="anonymous"></script>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        .input-tester-main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .input-tester-main h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tab-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 0;
+        }
+
+        .tab-btn {
+            font-family: 'Oswald', sans-serif;
+            background: transparent;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            border-bottom: none;
+            padding: 0.6rem 1.5rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 4px 4px 0 0;
+            opacity: 0.6;
+        }
+
+        .tab-btn.active {
+            opacity: 1;
+            background: rgba(0,255,0,0.08);
+            box-shadow: 0 0 15px rgba(0,255,0,0.3);
+        }
+
+        .tab-btn:hover {
+            opacity: 1;
+        }
+
+        .tab-panel {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        /* ── KEYBOARD ── */
+        .keyboard-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .last-key-display {
+            text-align: center;
+            font-size: 1.2rem;
+            padding: 1rem;
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            background: rgba(0,255,0,0.05);
+            letter-spacing: 1px;
+        }
+
+        .last-key-display span {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0,255,0,0.6);
+        }
+
+        .keyboard-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .key-row {
+            display: flex;
+            gap: 5px;
+        }
+
+        .key {
+            min-width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #00ff00;
+            background: rgba(0,255,0,0.03);
+            transition: all 0.1s ease;
+            user-select: none;
+            padding: 0 4px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .key.pressed {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0,255,0,0.8);
+        }
+
+        .key.w2  { min-width: 68px; }
+        .key.w3  { min-width: 95px; }
+        .key.w4  { min-width: 122px; }
+        .key.w5  { min-width: 149px; }
+        .key.w6  { min-width: 176px; }
+        .key.w7  { min-width: 230px; }
+        .key.space { min-width: 300px; }
+
+        /* ── MOUSE ── */
+        .mouse-layout {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .mouse-graphic {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mouse-body {
+            width: 120px;
+            height: 180px;
+            border: 2px solid #00ff00;
+            border-radius: 60px 60px 40px 40px;
+            position: relative;
+            background: rgba(0,255,0,0.03);
+            overflow: hidden;
+        }
+
+        .mouse-divider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 55%;
+            background: #00ff00;
+            transform: translateX(-50%);
+        }
+
+        .mouse-btn {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 55%;
+            transition: background 0.1s;
+        }
+
+        .mouse-btn.left  { left: 0; border-radius: 60px 0 0 0; }
+        .mouse-btn.right { right: 0; border-radius: 0 60px 0 0; }
+        .mouse-btn.middle {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 35px;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            background: transparent;
+            transition: background 0.1s;
+            z-index: 2;
+        }
+
+        .mouse-btn.pressed {
+            background: rgba(0,255,0,0.5);
+            box-shadow: inset 0 0 20px rgba(0,255,0,0.5);
+        }
+
+        .mouse-btn.middle.pressed {
+            background: #00ff00;
+        }
+
+        .mouse-stats {
+            flex: 1;
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 1rem;
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 6px;
+            background: rgba(0,255,0,0.03);
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-row .label {
+            color: #00ff00;
+            opacity: 0.7;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .stat-row .value {
+            color: #00ff00;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .scroll-indicator {
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .scroll-bar-track {
+            flex: 1;
+            height: 6px;
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .scroll-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: #00ff00;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* ── CONTROLLER ── */
+        .controller-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .controller-status {
+            text-align: center;
+            font-size: 1.1rem;
+            padding: 1rem;
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            background: rgba(0,255,0,0.05);
+            letter-spacing: 1px;
+        }
+
+        .controller-status.connected {
+            border-color: #00ff00;
+            box-shadow: 0 0 15px rgba(0,255,0,0.3);
+        }
+
+        .controller-status.disconnected {
+            opacity: 0.5;
+        }
+
+        .controller-layout {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Pure SVG controller */
+        #ctrl-svg {
+            width: 100%;
+            max-width: 480px;
+            flex-shrink: 0;
+        }
+
+        .ctrl-body-path {
+            fill: rgba(0,255,0,0.05);
+            stroke: #00ff00;
+            stroke-width: 2;
+        }
+
+        .stick-ring {
+            fill: rgba(0,255,0,0.04);
+            stroke: #00ff00;
+            stroke-width: 1.5;
+        }
+
+        .stick-dot {
+            fill: rgba(0,255,0,0.35);
+            stroke: #00ff00;
+            stroke-width: 1.5;
+            transition: cx 0.05s, cy 0.05s;
+        }
+
+        .ctrl-btn {
+            fill: rgba(0,255,0,0.05);
+            stroke: #00ff00;
+            stroke-width: 1.5;
+        }
+
+        .ctrl-btn.pressed {
+            fill: #00ff00;
+            filter: drop-shadow(0 0 6px rgba(0,255,0,0.9));
+        }
+
+        .ctrl-lbl {
+            fill: #00ff00;
+            font-family: 'Oswald', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+        }
+
+        .ctrl-lbl-pressed {
+            fill: #000000 !important;
+        }
+
+        .controller-data {
+            flex: 1;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .axis-row {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .axis-label {
+            width: 80px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .axis-track {
+            flex: 1;
+            height: 8px;
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .axis-fill {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            background: #00ff00;
+            border-radius: 4px;
+            transition: all 0.05s;
+        }
+
+        .axis-center-marker {
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            width: 2px;
+            height: 12px;
+            background: rgba(0,255,0,0.4);
+            transform: translateX(-50%);
+        }
+
+        .axis-val {
+            width: 55px;
+            text-align: right;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .trigger-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .trigger-block {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .trigger-block .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .trigger-track {
+            height: 12px;
+            background: rgba(0,255,0,0.1);
+            border: 1px solid rgba(0,255,0,0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .trigger-fill {
+            height: 100%;
+            width: 0%;
+            background: #00ff00;
+            border-radius: 4px;
+            transition: width 0.05s;
+        }
+
+        .buttons-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .btn-indicator {
+            padding: 4px 8px;
+            border: 1px solid rgba(0,255,0,0.4);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #00ff00;
+            background: rgba(0,255,0,0.03);
+            transition: all 0.1s;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-indicator.pressed {
+            background: #00ff00;
+            color: #000;
+            border-color: #00ff00;
+            box-shadow: 0 0 8px rgba(0,255,0,0.6);
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            opacity: 0.5;
+            letter-spacing: 1px;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Clean data layout */
+        .ctrl-row {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .ctrl-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .stick-pad {
+            width: 110px;
+            height: 110px;
+            border: 1px solid #00ff00;
+            border-radius: 50%;
+            position: relative;
+            background: rgba(0,255,0,0.03);
+        }
+
+        .stick-pad::before,
+        .stick-pad::after {
+            content: '';
+            position: absolute;
+            background: rgba(0,255,0,0.18);
+        }
+        .stick-pad::before { width: 1px; height: 100%; left: 50%; top: 0; }
+        .stick-pad::after  { width: 100%; height: 1px; top: 50%; left: 0; }
+
+        .stick-pad-dot {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #00ff00;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            box-shadow: 0 0 10px rgba(0,255,0,0.7);
+        }
+
+        .stick-vals {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #00ff00;
+            opacity: 0.8;
+            letter-spacing: 0.5px;
+        }
+
+        .trigger-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            width: 170px;
+            margin-top: 0.3rem;
+        }
+
+        .trigger-row-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .trigger-row-item .t-label {
+            width: 22px;
+            opacity: 0.7;
+        }
+
+        .dpad-grid,
+        .face-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 40px);
+            grid-template-rows: repeat(3, 40px);
+            gap: 3px;
+        }
+
+        .dpad-grid .btn-indicator,
+        .face-grid .btn-indicator {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-size: 0.8rem;
+        }
+
+        .btn-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 54px);
+            gap: 6px;
+        }
+
+        .btn-grid-2 .btn-indicator {
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-size: 0.78rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="assets/images/Game Masters Logo.png" alt="The Game Master Logo" class="logo-img">
+                The Game Master
+            </a>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="nav-center">
+            <button class="about-blank-btn" onclick="openAboutBlank()">Open in about:blank</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="games.html">Games</a>
+            <a href="cheats.html">Cheats</a>
+            <a href="forms.html">Forms</a>
+            <a href="input-tester.html" class="active">Input Tester</a>
+            <div id="profile-menu-container">
+                <div id="profile-icon" class="profile-icon" title="Account">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <div id="profile-dropdown" class="profile-dropdown" style="display: none;">
+                    <div id="guest-menu" class="menu-section">
+                        <button id="login-btn" class="dropdown-btn">🔑 Login</button>
+                        <button id="signup-btn" class="dropdown-btn">✨ Sign Up</button>
+                    </div>
+                    <div id="user-menu" class="menu-section" style="display: none;">
+                        <div id="user-info">
+                            <span id="user-greeting">Welcome!</span>
+                        </div>
+                        <button id="profile-btn" class="dropdown-btn">👤 Profile</button>
+                        <button id="logout-btn" class="dropdown-btn">🚪 Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="input-tester-main">
+        <h1>INPUT TESTER</h1>
+
+        <div class="tab-bar">
+            <button class="tab-btn active" data-tab="keyboard">Keyboard</button>
+            <button class="tab-btn" data-tab="mouse">Mouse</button>
+            <button class="tab-btn" data-tab="controller">Controller</button>
+        </div>
+
+        <!-- KEYBOARD TAB -->
+        <div class="tab-panel active" id="tab-keyboard">
+            <div class="keyboard-wrap">
+                <div class="last-key-display">
+                    Last Key: <span id="last-key">—</span>
+                    &nbsp;&nbsp;Code: <span id="last-code" style="font-size:1rem;opacity:0.7">—</span>
+                </div>
+                <div class="keyboard-layout">
+                    <!-- Row 1: Function keys -->
+                    <div class="key-row">
+                        <div class="key w2" data-key="Escape">Esc</div>
+                        <div class="key" style="min-width:20px;border:none;"></div>
+                        <div class="key" data-key="F1">F1</div>
+                        <div class="key" data-key="F2">F2</div>
+                        <div class="key" data-key="F3">F3</div>
+                        <div class="key" data-key="F4">F4</div>
+                        <div class="key" style="min-width:10px;border:none;"></div>
+                        <div class="key" data-key="F5">F5</div>
+                        <div class="key" data-key="F6">F6</div>
+                        <div class="key" data-key="F7">F7</div>
+                        <div class="key" data-key="F8">F8</div>
+                        <div class="key" style="min-width:10px;border:none;"></div>
+                        <div class="key" data-key="F9">F9</div>
+                        <div class="key" data-key="F10">F10</div>
+                        <div class="key" data-key="F11">F11</div>
+                        <div class="key" data-key="F12">F12</div>
+                    </div>
+                    <!-- Row 2: Numbers -->
+                    <div class="key-row">
+                        <div class="key" data-key="Backquote">`</div>
+                        <div class="key" data-key="Digit1">1</div>
+                        <div class="key" data-key="Digit2">2</div>
+                        <div class="key" data-key="Digit3">3</div>
+                        <div class="key" data-key="Digit4">4</div>
+                        <div class="key" data-key="Digit5">5</div>
+                        <div class="key" data-key="Digit6">6</div>
+                        <div class="key" data-key="Digit7">7</div>
+                        <div class="key" data-key="Digit8">8</div>
+                        <div class="key" data-key="Digit9">9</div>
+                        <div class="key" data-key="Digit0">0</div>
+                        <div class="key" data-key="Minus">-</div>
+                        <div class="key" data-key="Equal">=</div>
+                        <div class="key w3" data-key="Backspace">Backspace</div>
+                    </div>
+                    <!-- Row 3: QWERTY -->
+                    <div class="key-row">
+                        <div class="key w2" data-key="Tab">Tab</div>
+                        <div class="key" data-key="KeyQ">Q</div>
+                        <div class="key" data-key="KeyW">W</div>
+                        <div class="key" data-key="KeyE">E</div>
+                        <div class="key" data-key="KeyR">R</div>
+                        <div class="key" data-key="KeyT">T</div>
+                        <div class="key" data-key="KeyY">Y</div>
+                        <div class="key" data-key="KeyU">U</div>
+                        <div class="key" data-key="KeyI">I</div>
+                        <div class="key" data-key="KeyO">O</div>
+                        <div class="key" data-key="KeyP">P</div>
+                        <div class="key" data-key="BracketLeft">[</div>
+                        <div class="key" data-key="BracketRight">]</div>
+                        <div class="key w2" data-key="Backslash">\</div>
+                    </div>
+                    <!-- Row 4: ASDF -->
+                    <div class="key-row">
+                        <div class="key w3" data-key="CapsLock">Caps</div>
+                        <div class="key" data-key="KeyA">A</div>
+                        <div class="key" data-key="KeyS">S</div>
+                        <div class="key" data-key="KeyD">D</div>
+                        <div class="key" data-key="KeyF">F</div>
+                        <div class="key" data-key="KeyG">G</div>
+                        <div class="key" data-key="KeyH">H</div>
+                        <div class="key" data-key="KeyJ">J</div>
+                        <div class="key" data-key="KeyK">K</div>
+                        <div class="key" data-key="KeyL">L</div>
+                        <div class="key" data-key="Semicolon">;</div>
+                        <div class="key" data-key="Quote">'</div>
+                        <div class="key w4" data-key="Enter">Enter</div>
+                    </div>
+                    <!-- Row 5: ZXCV -->
+                    <div class="key-row">
+                        <div class="key w4" data-key="ShiftLeft">Shift</div>
+                        <div class="key" data-key="KeyZ">Z</div>
+                        <div class="key" data-key="KeyX">X</div>
+                        <div class="key" data-key="KeyC">C</div>
+                        <div class="key" data-key="KeyV">V</div>
+                        <div class="key" data-key="KeyB">B</div>
+                        <div class="key" data-key="KeyN">N</div>
+                        <div class="key" data-key="KeyM">M</div>
+                        <div class="key" data-key="Comma">,</div>
+                        <div class="key" data-key="Period">.</div>
+                        <div class="key" data-key="Slash">/</div>
+                        <div class="key w5" data-key="ShiftRight">Shift</div>
+                    </div>
+                    <!-- Row 6: Bottom -->
+                    <div class="key-row">
+                        <div class="key w2" data-key="ControlLeft">Ctrl</div>
+                        <div class="key w2" data-key="MetaLeft">Win</div>
+                        <div class="key w2" data-key="AltLeft">Alt</div>
+                        <div class="key space" data-key="Space">Space</div>
+                        <div class="key w2" data-key="AltRight">Alt</div>
+                        <div class="key w2" data-key="ControlRight">Ctrl</div>
+                        <div class="key" data-key="ArrowLeft">◀</div>
+                        <div class="key" style="display:flex;flex-direction:column;gap:0;">
+                            <div class="key" data-key="ArrowUp" style="height:20px;min-width:42px;font-size:0.6rem;border:none;border-bottom:1px solid #00ff00;">▲</div>
+                            <div class="key" data-key="ArrowDown" style="height:20px;min-width:42px;font-size:0.6rem;border:none;">▼</div>
+                        </div>
+                        <div class="key" data-key="ArrowRight">▶</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOUSE TAB -->
+        <div class="tab-panel" id="tab-mouse">
+            <div class="mouse-layout">
+                <div class="mouse-graphic">
+                    <div class="mouse-body">
+                        <div class="mouse-btn left"  id="mouse-left"></div>
+                        <div class="mouse-btn right" id="mouse-right"></div>
+                        <div class="mouse-divider"></div>
+                        <div class="mouse-btn middle" id="mouse-middle"></div>
+                    </div>
+                    <div style="font-size:0.8rem;opacity:0.5;text-align:center;margin-top:0.5rem;text-transform:uppercase;letter-spacing:1px;">Click in page to test</div>
+                </div>
+                <div class="mouse-stats">
+                    <div class="stat-row">
+                        <span class="label">Position X</span>
+                        <span class="value" id="mouse-x">—</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">Position Y</span>
+                        <span class="value" id="mouse-y">—</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">Left Button</span>
+                        <span class="value" id="mouse-left-state">Up</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">Right Button</span>
+                        <span class="value" id="mouse-right-state">Up</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">Middle Button</span>
+                        <span class="value" id="mouse-middle-state">Up</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">Scroll Total</span>
+                        <span class="value" id="mouse-scroll">0</span>
+                    </div>
+                    <div class="scroll-indicator">
+                        <span style="font-size:0.8rem;opacity:0.6;text-transform:uppercase;">Scroll</span>
+                        <div class="scroll-bar-track">
+                            <div class="scroll-bar-fill" id="scroll-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTROLLER TAB -->
+        <div class="tab-panel" id="tab-controller">
+            <div class="controller-section">
+                <div class="controller-status disconnected" id="ctrl-status">
+                    No controller detected. Connect a gamepad and press any button.
+                </div>
+                <div id="controller-content" style="display:none;">
+
+                    <!-- Row 1: Sticks + Triggers -->
+                    <div class="ctrl-row">
+                        <div class="ctrl-group">
+                            <div class="section-label">Left Stick</div>
+                            <div class="stick-pad">
+                                <div class="stick-pad-dot" id="lstick-pad-dot"></div>
+                            </div>
+                            <div class="stick-vals">
+                                <span>X: <span id="lx-val">0.00</span></span>
+                                <span>Y: <span id="ly-val">0.00</span></span>
+                            </div>
+                        </div>
+
+                        <div class="ctrl-group">
+                            <div class="section-label">Triggers</div>
+                            <div class="trigger-col">
+                                <div class="trigger-row-item">
+                                    <span class="t-label">LT</span>
+                                    <div class="trigger-track" style="flex:1"><div class="trigger-fill" id="lt-fill"></div></div>
+                                </div>
+                                <div class="trigger-row-item">
+                                    <span class="t-label">RT</span>
+                                    <div class="trigger-track" style="flex:1"><div class="trigger-fill" id="rt-fill"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ctrl-group">
+                            <div class="section-label">Right Stick</div>
+                            <div class="stick-pad">
+                                <div class="stick-pad-dot" id="rstick-pad-dot"></div>
+                            </div>
+                            <div class="stick-vals">
+                                <span>X: <span id="rx-val">0.00</span></span>
+                                <span>Y: <span id="ry-val">0.00</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Buttons -->
+                    <div class="ctrl-row">
+                        <div class="ctrl-group">
+                            <div class="section-label">D-Pad</div>
+                            <div class="dpad-grid">
+                                <span></span>
+                                <div class="btn-indicator" id="gp-btn-12">▲</div>
+                                <span></span>
+                                <div class="btn-indicator" id="gp-btn-14">◀</div>
+                                <span></span>
+                                <div class="btn-indicator" id="gp-btn-15">▶</div>
+                                <span></span>
+                                <div class="btn-indicator" id="gp-btn-13">▼</div>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="ctrl-group">
+                            <div class="section-label">Shoulders</div>
+                            <div class="btn-grid-2">
+                                <div class="btn-indicator" id="gp-btn-4">LB</div>
+                                <div class="btn-indicator" id="gp-btn-5">RB</div>
+                                <div class="btn-indicator" id="gp-btn-6">LT</div>
+                                <div class="btn-indicator" id="gp-btn-7">RT</div>
+                            </div>
+                        </div>
+
+                        <div class="ctrl-group">
+                            <div class="section-label">Face Buttons</div>
+                            <div class="face-grid">
+                                <span></span>
+                                <div class="btn-indicator" id="gp-btn-3">Y</div>
+                                <span></span>
+                                <div class="btn-indicator" id="gp-btn-2">X</div>
+                                <span></span>
+                                <div class="btn-indicator" id="gp-btn-1">B</div>
+                                <span></span>
+                                <div class="btn-indicator" id="gp-btn-0">A</div>
+                                <span></span>
+                            </div>
+                        </div>
+
+                        <div class="ctrl-group">
+                            <div class="section-label">Menu</div>
+                            <div class="btn-grid-2">
+                                <div class="btn-indicator" id="gp-btn-8">Back</div>
+                                <div class="btn-indicator" id="gp-btn-9">Start</div>
+                                <div class="btn-indicator" id="gp-btn-10">L3</div>
+                                <div class="btn-indicator" id="gp-btn-11">R3</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+
+    <script src="games/games-data.js"></script>
+    <script src="auth-system.js"></script>
+    <script src="app.js"></script>
+    <script>
+        function openAboutBlank() {
+            const w = window.open('about:blank', '_blank');
+            const iframe = w.document.createElement('iframe');
+            iframe.src = window.location.href;
+            iframe.style.cssText = 'width:100%;height:100%;border:none;position:fixed;top:0;left:0;';
+            w.document.body.style.cssText = 'margin:0;padding:0;overflow:hidden;';
+            w.document.body.appendChild(iframe);
+        }
+
+        // ── TABS ──
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        // ── KEYBOARD ──
+        const keyEls = {};
+        document.querySelectorAll('.key[data-key]').forEach(el => {
+            keyEls[el.dataset.key] = el;
+        });
+
+        document.addEventListener('keydown', e => {
+            if (!document.getElementById('tab-keyboard').classList.contains('active')) return;
+            e.preventDefault();
+            document.getElementById('last-key').textContent = e.key === ' ' ? 'Space' : e.key;
+            document.getElementById('last-code').textContent = e.code;
+            if (keyEls[e.code]) keyEls[e.code].classList.add('pressed');
+        });
+
+        document.addEventListener('keyup', e => {
+            if (!document.getElementById('tab-keyboard').classList.contains('active')) return;
+            if (keyEls[e.code]) keyEls[e.code].classList.remove('pressed');
+        });
+
+        // ── MOUSE ──
+        let scrollTotal = 0;
+        let maxScroll = 500;
+
+        document.addEventListener('mousemove', e => {
+            document.getElementById('mouse-x').textContent = e.clientX;
+            document.getElementById('mouse-y').textContent = e.clientY;
+        });
+
+        document.addEventListener('mousedown', e => {
+            if (e.button === 0) { document.getElementById('mouse-left').classList.add('pressed');  document.getElementById('mouse-left-state').textContent = 'DOWN'; }
+            if (e.button === 1) { document.getElementById('mouse-middle').classList.add('pressed'); document.getElementById('mouse-middle-state').textContent = 'DOWN'; }
+            if (e.button === 2) { document.getElementById('mouse-right').classList.add('pressed'); document.getElementById('mouse-right-state').textContent = 'DOWN'; }
+        });
+
+        document.addEventListener('mouseup', e => {
+            if (e.button === 0) { document.getElementById('mouse-left').classList.remove('pressed');  document.getElementById('mouse-left-state').textContent = 'Up'; }
+            if (e.button === 1) { document.getElementById('mouse-middle').classList.remove('pressed'); document.getElementById('mouse-middle-state').textContent = 'Up'; }
+            if (e.button === 2) { document.getElementById('mouse-right').classList.remove('pressed'); document.getElementById('mouse-right-state').textContent = 'Up'; }
+        });
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        document.addEventListener('wheel', e => {
+            scrollTotal += Math.round(e.deltaY);
+            document.getElementById('mouse-scroll').textContent = scrollTotal;
+            const pct = Math.min(Math.abs(scrollTotal) / maxScroll * 100, 100);
+            document.getElementById('scroll-fill').style.width = pct + '%';
+        });
+
+        // ── CONTROLLER ──
+        let gamepadIndex = null;
+        let rafId = null;
+
+        const DEADZONE = 0.05;
+
+        function applyDeadzone(v) {
+            const n = v ?? 0;
+            return Math.abs(n) < DEADZONE ? 0 : n;
+        }
+
+        function readTrigger(btn) {
+            return btn ? Math.max(0, Math.min(1, btn.value)) : 0;
+        }
+
+        function updateStickPad(dotId, xVal, yVal) {
+            const dot = document.getElementById(dotId);
+            if (!dot) return;
+            dot.style.left = (50 + xVal * 44) + '%';
+            dot.style.top  = (50 + yVal * 44) + '%';
+        }
+
+        function updateAxisVal(valId, rawValue) {
+            const v = applyDeadzone(rawValue);
+            const el = document.getElementById(valId);
+            if (el) el.textContent = v.toFixed(2);
+            return v;
+        }
+
+        function connectController(gp) {
+            gamepadIndex = gp.index;
+            document.getElementById('ctrl-status').textContent = 'Connected: ' + gp.id;
+            document.getElementById('ctrl-status').classList.remove('disconnected');
+            document.getElementById('ctrl-status').classList.add('connected');
+            document.getElementById('controller-content').style.display = 'block';
+            if (!rafId) rafId = requestAnimationFrame(pollController);
+        }
+
+        window.addEventListener('gamepadconnected', e => connectController(e.gamepad));
+
+        window.addEventListener('gamepaddisconnected', () => {
+            gamepadIndex = null;
+            document.getElementById('ctrl-status').textContent = 'No controller detected. Connect a gamepad and press any button.';
+            document.getElementById('ctrl-status').classList.add('disconnected');
+            document.getElementById('ctrl-status').classList.remove('connected');
+            document.getElementById('controller-content').style.display = 'none';
+            if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        });
+
+        function pollController() {
+            const gp = navigator.getGamepads()[gamepadIndex];
+            if (!gp) { rafId = requestAnimationFrame(pollController); return; }
+
+            // Buttons
+            gp.buttons.forEach((btn, i) => {
+                const el = document.getElementById('gp-btn-' + i);
+                if (el) el.classList.toggle('pressed', btn.pressed);
+            });
+
+            // Triggers
+            document.getElementById('lt-fill').style.width = (readTrigger(gp.buttons[6]) * 100) + '%';
+            document.getElementById('rt-fill').style.width = (readTrigger(gp.buttons[7]) * 100) + '%';
+
+            // Sticks — update value text and move the pad dot
+            const lx = updateAxisVal('lx-val', gp.axes[0]);
+            const ly = updateAxisVal('ly-val', gp.axes[1]);
+            const rx = updateAxisVal('rx-val', gp.axes[2]);
+            const ry = updateAxisVal('ry-val', gp.axes[3]);
+            updateStickPad('lstick-pad-dot', lx, ly);
+            updateStickPad('rstick-pad-dot', rx, ry);
+
+            rafId = requestAnimationFrame(pollController);
+        }
+    </script>
+</body>
+</html>
