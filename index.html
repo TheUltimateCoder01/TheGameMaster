@@ -86,6 +86,18 @@
             </div>
         </div>
 
+        <div class="gotd-section" id="gotd-section">
+            <div class="gotd-header">Game of the Day</div>
+            <div class="gotd-body">
+                <img class="gotd-img" id="gotd-img" src="" alt="">
+                <div class="gotd-info">
+                    <span class="gotd-category" id="gotd-category"></span>
+                    <div class="gotd-title" id="gotd-title"></div>
+                    <a class="gotd-play-btn" id="gotd-link" href="#">Play Now</a>
+                </div>
+            </div>
+        </div>
+
         <div class="welcome-section">
             <h2>Free Games. No Limits.</h2>
             <div class="welcome-stats">
@@ -112,6 +124,23 @@
             w.document.body.style.cssText = 'margin:0;padding:0;overflow:hidden;';
             w.document.body.appendChild(iframe);
         }
+
+        function loadGameOfTheDay() {
+            const localGames = games.filter(g => !g.url.startsWith('http'));
+            const dayIndex = Math.floor(Date.now() / 86400000);
+            const game = localGames[dayIndex % localGames.length];
+            document.getElementById('gotd-title').textContent = game.title;
+            document.getElementById('gotd-category').textContent = game.category;
+            document.getElementById('gotd-link').href = 'games/' + game.url;
+            const img = document.getElementById('gotd-img');
+            if (game.image) {
+                img.src = 'assets/images/games/' + game.image;
+                img.alt = game.title;
+            } else {
+                img.classList.replace('gotd-img', 'gotd-img-placeholder');
+            }
+        }
+        loadGameOfTheDay();
 
         function openRandomSites() {
             var validGames = games.filter(function(game) {
